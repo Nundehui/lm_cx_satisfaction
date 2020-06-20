@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Nundehui Xicotencatl" />
+
+
+<title>L&amp;D_modeling</title>
+
+<script src="satisfaction_insights_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="satisfaction_insights_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="satisfaction_insights_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="satisfaction_insights_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="satisfaction_insights_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="satisfaction_insights_files/navigation-1.1/tabsets.js"></script>
+<link href="satisfaction_insights_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="satisfaction_insights_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">L&amp;D_modeling</h1>
+<h4 class="author">Nundehui Xicotencatl</h4>
+<h4 class="date">June 1, 2017</h4>
+
+</div>
+
+
+<div id="what-could-we-train-en-qué-entrenamos-al-vendedor" class="section level2">
+<h2>What could we train? / ¿En qué entrenamos al vendedor?</h2>
+<p>The following show the key analysis of exit surveys which supported the address taken by the learning and development department towards the content of their curses.</p>
+<p>Las siguientes diapostivas resumen los hallazgos más importantes que apoyan la dirección que tomaron las estrategias del departamento de entrenamiento con respecto al contenido de sus cursos.</p>
+<pre><code>## 
+## Call:
+## lm(formula = VSatisfacciónAcum ~ VAtenciónAcum + VCortesíaAcum + 
+##     VConocimientoAcum + AAyudaNov + VInvitaciónAcum + VEncantoAcum + 
+##     VContratoAcum, data = ventas_servicio)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12.0934  -1.9742   0.1382   1.7657   8.2939 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        0.52707    5.79091   0.091    0.928    
+## VAtenciónAcum      0.43253    0.08639   5.007 2.41e-06 ***
+## VCortesíaAcum     -0.02991    0.03905  -0.766    0.445    
+## VConocimientoAcum -0.04597    0.03360  -1.368    0.174    
+## AAyudaNov          0.03053    0.04034   0.757    0.451    
+## VInvitaciónAcum    0.03875    0.02958   1.310    0.193    
+## VEncantoAcum       0.53808    0.08770   6.136 1.75e-08 ***
+## VContratoAcum     -0.02419    0.02569  -0.942    0.349    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.543 on 99 degrees of freedom
+##   (36 observations deleted due to missingness)
+## Multiple R-squared:  0.711,  Adjusted R-squared:  0.6905 
+## F-statistic: 34.79 on 7 and 99 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = VSatisfacciónAcum ~ VAtenciónAcum + VCortesíaAcum + 
+##     AAyudaNov + VInvitaciónAcum, data = ventas_servicio)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.0759  -2.2905   0.1932   2.2416   8.7940 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     17.35425    5.34576   3.246  0.00158 ** 
+## VAtenciónAcum    0.76501    0.07003  10.925  &lt; 2e-16 ***
+## VCortesíaAcum   -0.06567    0.04339  -1.514  0.13320    
+## AAyudaNov        0.03756    0.04344   0.865  0.38927    
+## VInvitaciónAcum  0.03681    0.03372   1.092  0.27754    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.101 on 102 degrees of freedom
+##   (36 observations deleted due to missingness)
+## Multiple R-squared:  0.601,  Adjusted R-squared:  0.5853 
+## F-statistic:  38.4 on 4 and 102 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = VSatisfacciónAcum ~ VConocimientoAcum + VContratoAcum, 
+##     data = ventas_servicio)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -18.8992  -3.0474  -0.3702   2.5691  16.5323 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       73.46768    1.80681  40.662  &lt; 2e-16 ***
+## VConocimientoAcum  0.02584    0.04109   0.629    0.531    
+## VContratoAcum      0.14563    0.03533   4.122 7.57e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.737 on 104 degrees of freedom
+##   (36 observations deleted due to missingness)
+## Multiple R-squared:  0.2039, Adjusted R-squared:  0.1886 
+## F-statistic: 13.32 on 2 and 104 DF,  p-value: 7.099e-06</code></pre>
+</div>
+<div id="including-plots" class="section level2">
+<h2>Including Plots</h2>
+<p>The regression line was used to define the relation between satisfaction and each personality trait.</p>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 36 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 36 rows containing missing values (geom_point).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 36 rows containing non-finite values (stat_smooth).
+
+## Warning: Removed 36 rows containing missing values (geom_point).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 36 rows containing non-finite values (stat_smooth).
+
+## Warning: Removed 36 rows containing missing values (geom_point).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 36 rows containing non-finite values (stat_smooth).
+
+## Warning: Removed 36 rows containing missing values (geom_point).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 36 rows containing non-finite values (stat_smooth).
+
+## Warning: Removed 36 rows containing missing values (geom_point).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 36 rows containing non-finite values (stat_smooth).
+
+## Warning: Removed 36 rows containing missing values (geom_point).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 36 rows containing non-finite values (stat_smooth).
+
+## Warning: Removed 36 rows containing missing values (geom_point).</code></pre>
+<p><img src="satisfaction_insights_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>To learn the best practices used by the sales team, we identify in a map the places where satisfaction scores higher (code can be found at CVPVentasServiciosMap.R).</p>
+<div class="figure">
+<img src="satisfactionmap.png" alt="Satisfaction scores map" width="80%" />
+<p class="caption">
+Satisfaction scores map
+</p>
+</div>
+<p>Furthermore, we inspect the scores in some of the dealerships to choose the ones to visit/call and get qualitative information from them.</p>
+<p><img src="satisfaction_insights_files/figure-html/custom_plot-1.png" width="672" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

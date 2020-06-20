@@ -1,7 +1,7 @@
 ---
 title: "L&D_modeling"
 author: "Nundehui Xicotencatl"
-date: "June 15, 2020"
+date: "June 1, 2017"
 output: 
   html_document:
     self_contained: no
@@ -18,7 +18,7 @@ The following show the key analysis of exit surveys which supported the address 
 Las siguientes diapostivas resumen los hallazgos más importantes que apoyan la dirección que tomaron las estrategias del departamento de entrenamiento con respecto al contenido de sus cursos. 
 
 
-```{r salesman_model, echo=TRUE}
+```{r salesman_model, include=FALSE}
 require(tidyverse)
 require(plyr)
 require(psych)
@@ -27,33 +27,36 @@ require(grid)
 require(gridExtra)
 require(ggradar)
 require(scales)
+require(fmsb)
 
-dir1<-"C:/Users/user/Desktop/CursoDataScience/Proyecto/Data" 
+dir1<-"C:/Users/user/Desktop/CursoDataScience/Proyecto/lm_satisfaction/Data" 
 ventas_servicio<-read.csv(paste(dir1,"CVPVentasServicioT.csv",sep="/"),stringsAsFactors=FALSE,na.strings = c("NA","-")) 
 
+
+```
+
+```{r sales_model, echo=FALSE}
 #Models: Satisfaction
 #Model 1: Características del vendedor vs índice de satisfacción
 Vendedor<-lm(VSatisfacciónAcum ~ VAtenciónAcum+VCortesíaAcum+VConocimientoAcum+AAyudaNov+VInvitaciónAcum+VEncantoAcum+VContratoAcum,data=ventas_servicio)
-Vendedor 
 summary(Vendedor)
+
+#Proportion of variability of satisfaction explained by all individual features: 0.71
 
 #Model 2: Softskills vs índice de satisfacción
 Vendedor2<-lm(VSatisfacciónAcum ~ VAtenciónAcum+VCortesíaAcum+AAyudaNov+VInvitaciónAcum,data=ventas_servicio)
-Vendedor2 
 summary(Vendedor2)
 
 #Model 3: Conocimientos vs índice de satisfacción
 Vendedor3<-lm(VSatisfacciónAcum ~ VConocimientoAcum+VContratoAcum,data=ventas_servicio)
-Vendedor 
 summary(Vendedor3)
-
 ```
 
 ## Including Plots
 
 The regression line was used to define the relation between satisfaction and each personality trait.
 
-```{r plots, echo=FALSE}
+```{r plots, include=FALSE}
 Gráficas<-par(mfrow=c(4,4))
 
 
@@ -106,28 +109,27 @@ geom_smooth(method="lm", se=TRUE, fullrange=FALSE, level=0.95)+
 labs(x="Satisfacción",y="Explicación del contrato")+
 scale_x_continuous(breaks = seq(0,100,by=5))
 
+
+
+```
+
+```{r, echo=FALSE}
+
 grid.arrange(SatAt, SatCor,SatCon,SatAy,SatPres,SatEnc,SatCont, ncol = 3, top = "Características del vendedor relacionadas \n con la satisfacción del cliente")
-
-
-#par(Gráficas)
-
 
 ```
 
 To learn the best practices used by the sales team, we identify in a map the places where satisfaction scores higher (code can be found at CVPVentasServiciosMap.R).
 
-```{r CVPmap, echo=FALSE, fig.cap="Satisfaction scores map", out.width="100%"}
-knitr::include_graphics("C:/Users/user/Desktop/CursoDataScience/Proyecto/Data/1_VExperienciaClienteAcum.png", error=FALSE)
+```{r CVPmap, echo=FALSE, fig.cap="Satisfaction scores map", out.width="80%"}
+knitr::include_graphics("./satisfactionmap.png", error=FALSE)
 
 
 ```
 
 Furthermore, we inspect the scores in some of the dealerships to choose the ones to visit/call and get qualitative information from them. 
 
-```{r radarchart_4dealerships}
-
-# Library
-library(fmsb)
+```{r radarchart_4dealerships, include=FALSE}
 
 VarVendedor <- c("VAtenciónAcum", "VCortesíaAcum", "VConocimientoAcum","AAyudaNov","VInvitaciónAcum","VEncantoAcum","VContratoAcum")
 VarVendedorB <- ventas_servicio[VarVendedor]
@@ -143,8 +145,12 @@ data=rbind(rep(100,30) , rep(0,10) , data)
 #==================
 # Plot 1: Default radar chart proposed by the library:
 radarchart(data)
- 
- 
+
+
+```
+
+```{r custom_plot, echo=FALSE}
+
 #==================
 # Plot 2: Same plot with custom features
 colors_border=c( rgb(0.2,0.5,0.5,0.9), rgb(0.8,0.2,0.5,0.8) , rgb(0.75,1,0.25,0.6),rgb(1,0.55,0.15,0.5))#uno para cada observación
@@ -158,8 +164,5 @@ radarchart( data  , axistype=1 ,
     vlcex=0.8 
     )
 legend(x=2, y=-0.2, legend = rownames(data[-c(1,2),]), bty = "n", pch=20, col=colors_border , text.col = "black", cex=1.2, pt.cex=2)
-  
-
 ```
-
 
